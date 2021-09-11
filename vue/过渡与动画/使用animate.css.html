@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    type="text/css">
+  <title>使用animate.css</title>
+  <style>
+    .animated-item {
+      padding: 20px;
+      background-color: #f44;
+      width: fit-content;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="isAnimate=!isAnimate">toggle</button>
+    <transition enter-active-class="animate__tada" leave-active-class="animate__bounceOutRight">
+      <h3 class="animate__animated animated-item" v-if="isAnimate" :animate__duration="10000">hello animate.css</h3>
+    </transition>
+
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        isAnimate: false
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>遍历使用transitionGroup</title>
+  <style>
+    ul li {
+      line-height: 36px;
+      background: #f44;
+      margin-bottom: 8px;
+      height: 36px;
+      width: 400px;
+      border-radius: 4px;
+      padding-left: 8px;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    ul li:hover {
+      background: #4f4;
+      transition: 1s;
+    }
+
+    .v-enter,
+    .v-leave-to {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 1s;
+    }
+
+    .v-move {
+      transition: all 1s;
+    }
+
+    .v-leave-active {
+      position: absolute;
+      width: 400px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <button @click="push">push</button>
+    <!-- <ul> -->
+    <transition-group appear tag="ul">
+      <li v-for="(item, index) in masters" :key="item.id" @click="del(index)">
+        {{item.id}} --- {{item.name.toUpperCase()}}
+      </li>
+    </transition-group>
+    <!-- </ul> -->
+
+    <!-- appear实现入场效果 -->
+  </div>
+
+
+
+  <script src="./lib/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        masters: [
+          { id: 100, name: "kimi" },
+          { id: 101, name: "jack" },
+          { id: 102, name: "rosa" },
+          { id: 103, name: "jenny" },
+          { id: 104, name: "ken" },
+        ],
+      },
+      methods: {
+        push() {
+          const master = { id: 105, name: 'ann' };
+          this.masters.push(master);
+        },
+        del(index) {
+          this.masters.splice(index, 1);
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

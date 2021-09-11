@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模拟小球半场动画</title>
+  <style>
+    .ball {
+      width: 30px;
+      height: 30px;
+      background: #f44;
+      border-radius: 50%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <button @click="isAnimated=!isAnimated">animate</button>
+    <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+      <div class="ball" v-if="isAnimated"></div>
+    </transition>
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        isAnimated: false
+      },
+      methods: {
+        beforeEnter(el) {
+          el.style.transform = 'translate(0, 0)';
+        },
+        enter(el, done) {
+          el.offsetWidth;
+          el.style.transform = 'translate(400px, 400px)';
+          el.style.transition = 'all 1s';
+          done();
+        },
+        afterEnter(el) {
+          this.isAnimated = !this.isAnimated;
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

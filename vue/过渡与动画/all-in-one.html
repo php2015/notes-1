@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    type="text/css">
+  <title>all-in-one</title>
+  <style>
+    #app>div {
+      padding: 8px;
+      margin-bottom: 8px;
+      background: #f44;
+    }
+
+    #app>div h3 {
+      color: #fff;
+    }
+
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 1s;
+    }
+
+    .horizontal-enter,
+    .horizontal-leave-to {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+
+    .horizontal-enter-active,
+    .horizontal-leave-active {
+      transition: all 1s;
+    }
+
+    .vertical-enter,
+    .vertical-leave-to {
+      opacity: 0;
+      transform: translateY(200px);
+    }
+
+    .vertical-enter-active,
+    .vertical-leave-active {
+      transition: all 1s;
+    }
+
+    .bounce-enter-active {
+      animation: bounce 400ms;
+    }
+
+    .bounce-leave-active {
+      animation: bounce 400ms reverse;
+    }
+
+    h3.bounce {
+      background: #44f;
+      width: fit-content;
+      padding: 8px;
+      border-radius: 4px;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: scale(0);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <div>
+      <button @click="isShowBasic=!isShowBasic">toggle</button>
+      <transition>
+        <h3 v-if="isShowBasic">hello world</h3>
+      </transition>
+    </div>
+
+
+    <div>
+      <button @click="isShowHorizontal=!isShowHorizontal">toggle</button>
+      <transition name="horizontal">
+        <h3 v-if="isShowHorizontal">hello world</h3>
+      </transition>
+    </div>
+
+
+    <div>
+      <button @click="isShowVertical=!isShowVertical">toggle</button>
+      <transition name="vertical">
+        <h3 v-if="isShowVertical">hello world</h3>
+      </transition>
+    </div>
+
+
+    <div>
+      <button @click="isAnimated=!isAnimated">toggle</button>
+      <transition name="bounce">
+        <h3 v-if="isAnimated" class="bounce">hello world
+        </h3>
+      </transition>
+    </div>
+
+
+    <div>
+      <button @click="isAnimateCss=!isAnimateCss">toggle</button>
+      <transition enter-active-class="animate__tada" leave-active-class="animate__backOutRight">
+        <h3 v-if="isAnimateCss" class="animate__animated">hello world
+        </h3>
+      </transition>
+    </div>
+
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        isShowBasic: false,
+        isShowHorizontal: false,
+        isShowVertical: false,
+        isAnimated: false,
+        isAnimateCss: false,
+      }
+    })
+  </script>
+</body>
+
+</html>

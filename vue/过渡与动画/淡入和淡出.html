@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>淡入和淡出</title>
+  <style>
+    /* 进入之前和离开之后 */
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+
+
+    /* 进入之后和离开之前 */
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 500ms;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="isShow=!isShow">Toggle show</button>
+    <transition>
+      <h3 v-if="isShow">hello world.</h3>
+    </transition>
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        isShow: false
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>配合animation</title>
+  <style>
+    .bounce-enter-active {
+      animation: bounce 300ms;
+    }
+
+    .bounce-leave-active {
+      animation: bounce 400ms reverse;
+    }
+
+    .animation-item {
+      text-indent: 2em;
+      background: #f44;
+      width: 240px;
+      padding: 20px;
+      border-radius: 4px;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: scale(0);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="isShow=!isShow">toggle</button>
+    <transition name="bounce">
+      <h3 class="animation-item" v-if="isShow">
+        指望别人都是扯淡，安全感只能自己给自己。再光鲜的副驾驶，都不如自己握紧方向盘。</h3>
+    </transition>
+  </div>
+
+
+  <script src="./lib/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        isShow: false
+      }
+    })
+  </script>
+</body>
+
+</html>

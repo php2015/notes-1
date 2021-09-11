@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>all-in-one-遍历</title>
+  <style>
+    ul li {
+      height: 36px;
+      line-height: 36px;
+      border: 1px dashed black;
+      margin-bottom: 8px;
+      width: 400px;
+      padding-left: 8px;
+      border-radius: 4px;
+      background: #f44;
+      color: #fff;
+    }
+
+    .list-enter {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+
+    .list-leave-to {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+
+    .list-enter-active,
+    .list-leave-active {
+      transition: all 400ms;
+    }
+
+    .list-move {
+      transition: all 400ms;
+    }
+
+    .list-leave-active {
+      position: absolute;
+      width: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="push">push</button>
+    <transition-group tag="ul" name="list" appear>
+      <li v-for="(item, index) in masters" :key="item.id" @click="del(index)">
+        {{item.id}} --- {{item.name.toUpperCase()}}
+      </li>
+    </transition-group>
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        masters: [
+          { id: 100, name: 'kimi' },
+          { id: 101, name: 'jack' },
+          { id: 102, name: 'rose' },
+          { id: 103, name: 'ken' },
+          { id: 104, name: 'rosa' },
+        ]
+      },
+      methods: {
+        push() {
+          const master = { id: 105, name: "anna" };
+          this.masters.unshift(master);
+        },
+        del(index) {
+          this.masters.splice(index, 1);
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

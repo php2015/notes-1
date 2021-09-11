@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算属性的get和set</title>
+  <style>
+    .name-list li {
+      margin-bottom: 8px;
+    }
+
+    .tab {
+      border-collapse: collapse;
+      width: 600px;
+      text-align: center;
+    }
+
+    th,
+    td {
+      padding: 2px;
+    }
+
+    .total {
+      text-align: left;
+    }
+
+    .box {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <ul class="name-list">
+      <li><input type="text" placeholder="first name" v-model="firstName"></li>
+      <li><input type="text" placeholder="first name" v-model="lastName"></li>
+      <li><input type="text" placeholder="full name" v-model="fullName"></li>
+    </ul>
+
+    <table class="tab" border="1">
+      <thead>
+        <th>ID</th>
+        <th>名称</th>
+        <th>价格</th>
+        <th>数量</th>
+        <th>总价</th>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in items" :key="item.id">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.price | priceFormat}}</td>
+          <td>
+            <button @click="reduce(index)">-</button>
+            {{item.amount}}
+            <button @click="increase(index)">+</button>
+          </td>
+          <td>{{item.price*item.amount | priceFormat}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="total">
+            Total: {{total | priceFormat}}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="box">
+      <h3>水果名字提示</h3>
+      输入水果英文名称提示筛选：<input type="text" v-model="fruit">
+      <ul v-if="fruit && filteredFruits.length">
+        <li v-for="(item, index) in filteredFruits" :key="index">{{item}}</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        firstName: 'Edison',
+        lastName: 'Chen',
+        items: JSON.parse(localStorage.getItem('books')) || [
+          { id: 100, amount: 3, name: 'JavaScript半知半解', price: 120 },
+          { id: 101, amount: 2, name: 'Web开发实战', price: 220 },
+          { id: 102, amount: 1, name: 'css权威指南 ', price: 160 },
+          { id: 103, amount: 4, name: 'JQuery权威指南', price: 90 },
+        ],
+        fruit: '',
+        fruits: [
+          "apple",
+          "banana",
+          "mango",
+          "watermelon",
+          "melon",
+          "strawberry",
+          "orange",
+          "grape",
+          "cherry",
+          "kiwi"]
+      },
+      computed: {
+        fullName: {
+          get() {
+            return `${this.firstName} ${this.lastName}`
+          },
+          set(newVal) {
+            if (newVal) {
+              const arr = newVal.split(' ');
+              this.firstName = arr[0];
+              this.lastName = arr[1];
+            }
+          }
+        },
+        total() {
+          return this.items.reduce((prev, next) => prev + next.price * next.amount, 0)
+        },
+        filteredFruits() {
+          return this.fruits.filter(item => item.includes(this.fruit))
+        }
+      },
+      filters: {
+        priceFormat(price) {
+          return `¥${price.toFixed(2)}`
+        }
+      },
+      methods: {
+        reduce(index) {
+          if (this.items[index].amount > 1) {
+            this.items[index].amount--
+          } else {
+            const isRemoved = confirm(`移除《${this.items[index].name}》此书？`);
+            if (isRemoved) {
+              this.items.splice(index, 1)
+            }
+          }
+        },
+        increase(index) {
+          this.items[index].amount++
+        }
+      },
+      watch: {
+        items: {
+          deep: true,
+          handler(newVal) {
+            localStorage.setItem('books', JSON.stringify(newVal))
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

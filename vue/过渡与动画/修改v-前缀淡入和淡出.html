@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改v-前缀淡入和淡出</title>
+  <style>
+    .item {
+      background: #f44;
+      padding: 8px;
+      margin-bottom: 8px;
+    }
+
+    /* 进入之前和离开之后 */
+    .horizontal-enter,
+    .horizontal-leave-to {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+
+
+    /* 进入之后和离开之前 */
+    .horizontal-enter-active,
+    .horizontal-leave-active {
+      transition: all 500ms;
+    }
+
+
+    .vertical-enter,
+    .vertical-leave-to {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+
+
+    /* 进入之后和离开之前 */
+    .vertical-enter-active,
+    .vertical-leave-active {
+      transition: all 500ms;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="item">
+      <button @click="h3IsShow=!h3IsShow">Toggle show</button>
+      <transition name="horizontal">
+        <h3 v-if="h3IsShow">hello world.</h3>
+      </transition>
+    </div>
+
+    <div class="item">
+      <button @click="h4IsShow=!h4IsShow">Toggle show</button>
+      <transition name="vertical">
+        <h4 v-if="h4IsShow">hello world.</h4>
+      </transition>
+    </div>
+
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        h3IsShow: false,
+        h4IsShow: false,
+      }
+    })
+  </script>
+</body>
+
+</html>

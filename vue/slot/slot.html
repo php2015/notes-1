@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slot</title>
+  <style>
+    .unnamed-slot,
+    .named-slot,
+    .scoped-slot {
+      background: #f44;
+      min-width: 200px;
+      max-width: fit-content;
+      padding: 8px;
+      margin-bottom: 8px;
+      /* color: #fff; */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="unnamed-slot">
+      <unnamed>
+        <template v-slot:default>
+          <button>button</button>
+          <button>button</button>
+          <button>button</button>
+        </template>
+      </unnamed>
+    </div>
+
+    <div class="named-slot">
+      <named>
+        <template v-slot:left>
+          <button>left</button>
+        </template>
+        <template v-slot:center>
+          <button>center</button>
+        </template>
+        <template v-slot:right>
+          <button>right</button>
+        </template>
+      </named>
+    </div>
+
+    <div class="scoped-slot">
+      <scoped></scoped>
+      <scoped>
+        <template v-slot:fruits-slot="{fruits}">
+          <div>
+            {{fruits.join('-')}}
+          </div>
+        </template>
+      </scoped>
+    </div>
+
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <template id="unnamed">
+    <div>
+      <h3>匿名插槽</h3>
+      <slot><button>button</button></slot>
+    </div>
+  </template>
+
+  <template id="named">
+    <div>
+      <h3>具名插槽</h3>
+      <slot name="left"><button>button</button></slot>
+      <slot name="center"><button>button</button></slot>
+      <slot name="right"><button>button</button></slot>
+    </div>
+  </template>
+
+  <template id="scoped">
+    <div>
+      <h3>作用域插槽</h3>
+      <slot name="fruits-slot" :fruits="fruits">
+        <ul>
+          <li v-for="(item, index) in fruits" :key="index">{{item}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+  <script>
+    const Unnamed = {
+      template: '#unnamed'
+    };
+    const Named = {
+      template: '#named'
+    };
+    const Scoped = {
+      template: '#scoped',
+      data() {
+        return {
+          fruits: ['apple', 'banana', 'mango', 'kiwi']
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: "#app",
+      components: {
+        Unnamed,
+        Named,
+        Scoped
+      }
+    })
+  </script>
+</body>
+
+</html>
