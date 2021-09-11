@@ -1,0 +1,23 @@
+{
+  "id": "2289419",
+  "name": "banner左右",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1420819",
+      "name": "next",
+      "font_class": "next1",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "1508318",
+      "name": "prev",
+      "font_class": "prev1",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    }
+  ]
+}
