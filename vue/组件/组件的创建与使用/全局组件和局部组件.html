@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全局组件和局部组件</title>
+  <style>
+    #apple,
+    #banana {
+      margin-bottom: 8px;
+      background: #f44;
+      width: 200px;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="apple">
+    <h3>Vue实例#apple</h3>
+    <cat></cat>
+  </div>
+
+  <div id="banana">
+    <h3>Vue实例#banana</h3>
+    <cat></cat>
+    <dog></dog>
+  </div>
+
+  <script src="../../lib/vue.js"></script>
+  <script>
+    // 1. 创建
+    const Cat = {
+      template: `<div>hello im a cat</div>`
+    };
+    const Dog = {
+      template: `<div>hello im a dog</div>`
+    }
+
+    // 2.1 注册为全局组件（和局部组件的区别就是，如果一个页面有其他的Vue实例，也可以使用）
+    Vue.component('cat', Cat)
+
+    // 3. 使用（模板上使用）
+
+    new Vue({
+      el: "#apple",
+    });
+    new Vue({
+      el: "#banana",
+      components: { Dog } // 2.2 注册为局部组件
+    })
+  </script>
+</body>
+
+</html>
