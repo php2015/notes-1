@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cloneNode方法</title>
+  <style>
+    #parent {
+      width: 1000px;
+      height: 200px;
+      box-shadow: 1px 1px 4px #000;
+      display: flex;
+      margin-top: 10px;
+    }
+
+    .child {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="parent">
+    <div class="child" style="background: #f44;"></div>
+    <div class="child" style="background: #4f4;"></div>
+    <div class="child" style="background: #44f;"></div>
+    <div class="child" style="background: #ff4;"></div>
+  </div>
+
+  <script>
+
+
+    const parent = document.getElementById('parent');
+    const result = parent.cloneNode(true); // 重点
+
+    parent.onclick = function () { console.log('parent'); }
+    document.querySelectorAll('.child')
+      .forEach(el => {
+        el.onclick = function (e) {
+          e.stopPropagation();
+          console.log('child');
+        }
+      })
+
+
+
+    console.log(result);
+    document.body.append(result)
+
+
+
+  </script>
+</body>
+
+</html>
