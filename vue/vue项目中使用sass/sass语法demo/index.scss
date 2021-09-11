@@ -1,0 +1,92 @@
+
+// 1. 注释：单行注释不会被编译 多行会
+
+// 2. 作用域：局部变量需要先定义后使用 否则往上级作用域查找
+
+// 3. 定义变量及运算
+$unit: 200px;
+$doubleunit: $unit * 2;
+
+
+// 8. 继承 @extend
+%base{
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  @extend %base
+};
+
+// 6. 自定义函数
+@function sum($a, $b){ @return $a + $b };
+
+// 7. 混入，对应@include
+@mixin fl {float: left;};
+@mixin fr {float: right;};
+@mixin bg($color){background: $color;}
+
+// 4. 插值写法
+$top: top;
+$right: right;
+$bottom: bottom;
+$left: left;
+
+.#{$top}-box{
+  margin-top: 50px;
+  height: $unit;
+  width: $unit;
+  @include bg(#f44);
+}
+
+
+// 9. 合并
+$bgImg:(a:url(./img/cat.jpg),b:url(./img/lion.jpg));
+$transform: (a: translateX(100px), b: rotate(45deg));
+
+// 5. 选择器嵌套
+.parent{
+  height: $unit;
+  width: $unit;
+  transition: 1s;
+  @include bg(#4f4);
+  .child{
+    border:2px solid #44f;
+    box-sizing: border-box;
+    height: $unit;
+    width: $unit/2;
+    @include bg(#44f);
+    @include fr;
+    background: map-values($map: ($bgImg));
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 100px;
+  }
+  &:hover{
+    transform: zip(map-values($transform)...);
+  }
+}
+
+// 10. 条件
+$boxHeight: 100px;
+.box{
+  @if($boxHeight>=100){
+    height: $boxHeight*2;
+  }@else{
+    height: $boxHeight*4;
+  };
+  width: 200px;
+  @include bg(#44f);
+}
+
+// 11. 循环
+// 如果是through包括4
+@for $i from 0 to 4{
+  .box-#{$i}{
+    height:$i*100;
+  }
+}
+
+// 12. 导入
+// @import 'reset.scss';
+

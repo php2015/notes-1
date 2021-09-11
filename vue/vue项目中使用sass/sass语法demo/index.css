@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.top-box {
+  margin-top: 50px;
+  height: 200px;
+  width: 200px;
+  background: #f44;
+}
+
+.parent {
+  height: 200px;
+  width: 200px;
+  transition: 1s;
+  background: #4f4;
+}
+
+.parent .child {
+  border: 2px solid #44f;
+  box-sizing: border-box;
+  height: 200px;
+  width: 100px;
+  background: #44f;
+  float: right;
+  background: url(./img/cat.jpg), url(./img/lion.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0, 0 100px;
+}
+
+.parent:hover {
+  transform: translateX(100px) rotate(45deg);
+}
+
+.box {
+  height: 200px;
+  width: 200px;
+  background: #44f;
+}
+
+.box-0 {
+  height: 0;
+}
+
+.box-1 {
+  height: 100;
+}
+
+.box-2 {
+  height: 200;
+}
+
+.box-3 {
+  height: 300;
+}
