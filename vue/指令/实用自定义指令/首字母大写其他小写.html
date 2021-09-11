@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首字母大写其他小写</title>
+</head>
+
+<body>
+  <div id="app">
+    <h3 v-standard="msg"></h3>
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+    // 全局
+    Vue.directive('standard', (el, binding) => {
+      const value = binding.value;
+      el.innerHTML = value.slice(0, 1).toUpperCase() + value.slice(1).toLowerCase();
+    })
+
+    new Vue({
+      el: "#app",
+      data: {
+        msg: 'this is a text.'
+      },
+      directives: { // 局部
+        standard(el, binding) {
+          // console.log(binding);
+          const value = binding.value;
+          el.innerHTML = value.slice(0, 1).toUpperCase() + value.slice(1).toLowerCase()
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

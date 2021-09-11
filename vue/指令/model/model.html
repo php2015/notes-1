@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>model</title>
+  <style>
+    .item {
+      width: 600px;
+      box-shadow: 1px 1px 4px #000;
+      margin-top: 8px;
+      padding: 8px;
+    }
+
+    .item h3 {
+      text-transform: capitalize;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="item">
+      <h3>im a {{gender}}</h3>
+      <label><input type="radio" value="man" v-model="gender"> man</label>
+      <label><input type="radio" value="women" v-model="gender"> women</label>
+    </div>
+
+    <div class="item">
+      <h3>fruit: i like {{selectedFruit}}</h3>
+      <select v-model="selectedFruit">
+        <option :value="item" v-for="(item, index) in fruits" :key="index">{{item}}</option>
+      </select>
+    </div>
+
+    <div class="item">
+      <h3>animal: i like {{selectedAnimal}}</h3>
+      <select v-model="selectedAnimal" multiple>
+        <option :value="item" v-for="(item, index) in animals" :key="index">{{item}}</option>
+      </select>
+    </div>
+
+    <div class="item">
+      <h3>sports: i like {{selectedSports}}</h3>
+      <label v-for="(item, index) in sports" :key="index">
+        <input type="checkbox" v-model="item.isChecked">{{item.name}}</label>
+    </div>
+
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        gender: 'man',
+        fruits: ['apple', 'banana', 'mango', 'kiwi'],
+        selectedFruit: 'mango',
+        animals: ['cat', 'dog', 'monkey', 'tiger'],
+        selectedAnimal: [],
+        sports: [
+          { name: 'basketball', isChecked: false },
+          { name: 'football', isChecked: false },
+          { name: 'badminton', isChecked: false },
+          { name: 'swimming', isChecked: false },
+        ]
+      },
+      computed: {
+        selectedSports() {
+          return this.sports.filter(el => el.isChecked).map(el => el.name)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

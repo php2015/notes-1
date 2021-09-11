@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动态绑定class</title>
+  <style>
+    li {
+      margin-bottom: 4px;
+      width: 200px;
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    .active {
+      background: #f44;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(item, index) in list" :class="{active:currentIndex===index}" @click="setIndex(index)" :key="index">
+        {{item}}</li>
+    </ul>
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        list: ['cat', 'dog', 'monkey', 'tiger'],
+        currentIndex: 0
+      },
+      methods: {
+        setIndex(index) {
+          console.log(index);
+          this.currentIndex = index
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

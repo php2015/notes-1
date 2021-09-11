@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model修饰符</title>
+  <style>
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li>lazy: <input type="text" v-model.lazy="lazy"></li>
+      <li>number: <input type="text" v-model.number="number"></li>
+      <li>trim: <input type="text" v-model.trim="trim"></li>
+    </ul>
+  </div>
+
+  <script src="./lib/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        lazy: 'hello world',
+        number: 12,
+        trim: 'kimi is a cat'
+      }
+    })
+  </script>
+</body>
+
+</html>
